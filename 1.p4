@@ -271,9 +271,12 @@ control MyDeparser(packet_out packet, in headers hdr) {
         packet.emit(hdr.ethernet);
         packet.emit(hdr.ipv4);
         packet.emit(hdr.tcp);
-        if (meta.isModbus) {
+	// 判断协议类型
+        if (hdr.new_ethernet.protocolType == 0x01) { // MODbusTCP
+            packet.emit(hdr.tcp);
             packet.emit(hdr.modbus);
-        } else if (meta.isProfinet) {
+        } else if (hdr.new_ethernet.protocolType == 0x02) { // Profinet
+            packet.emit(hdr.tcp);
             packet.emit(hdr.profinet);
         }
     }
