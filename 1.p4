@@ -79,7 +79,7 @@ header profinetIRT_t {
     bit<8>  telegramNumber;
 }
 
-struct metadata_t {
+struct metadata {
     bit<1> isModbus;
     bit<1> isProfinet;
     bit<8> nhop_index;
