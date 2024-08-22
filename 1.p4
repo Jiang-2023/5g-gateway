@@ -220,9 +220,9 @@ control MyIngress(inout headers hdr,
             ipv4_lpm.apply();
         }
 
-        if (meta.isModbus) {
+        if (meta.isModbus != 0) {
             add_new_ethernet(hdr.ethernet.srcAddr, hdr.ethernet.dstAddr, 0x88B5, 0x01); // MODbusTCP类型标识
-        } else if (meta.isProfinet) {
+        } else if (meta.isProfinet != 0) {
             add_new_ethernet(hdr.ethernet.srcAddr, hdr.ethernet.dstAddr, 0x88B5, 0x02); // Profinet类型标识
         }
     }
