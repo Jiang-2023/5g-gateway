@@ -232,10 +232,10 @@ control MyIngress(inout headers hdr,
         // 对所有数据包应用地址映射动作
         map_addresses(hdr.ethernet.srcAddr, hdr.ethernet.dstAddr);
 
-        if (meta.is_modbus) {
+        if (meta.is_modbus == 1) {
             // 如果是Modbus TCP数据包，应用IPv4转发表
             ipv4_lpm.apply();
-        } else if (meta.is_profinet) {
+        } else if (meta.is_profinet ==1) {
             // 如果是Profinet数据包，直接转发到Profinet端口
             forward(1);     // 假设端口1为Profinet处理端口
         } else if (hdr.ipv4.isValid()) {
